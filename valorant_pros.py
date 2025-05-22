@@ -25,11 +25,35 @@ def print_all_info():
 
 #this function prints all of the info from a chosen team
 def print_all_team_info():
-    team = input("What team's info would you like to see? \n")
+    team_input = input("What team's info would you like to see? \n1. G2\n2. Sentinels\n3. MIBR\n4. Rex Regum Qeon\n5. Gen.G\n6. Paper Rex\n7. Xi Lai Gaming\n8. Bilibili Gaming\n9. Wolves Esports\n10. fnatic\n11. Team Heretics\n12. Team Liquid\n")
+    if team_input == "1":
+        team = '"G2"'
+    elif team_input == "2":
+        team = '"SEN"'
+    elif team_input == "3":
+        team = '"MIBR"'
+    elif team_input == "4":
+        team = '"RRQ"'
+    elif team_input == "5":
+        team = '"GEN"'
+    elif team_input == "6":
+        team = '"PRX"'
+    elif team_input == "7":
+        team = '"XLG"'
+    elif team_input == "8":
+        team = '"BLG"'
+    elif team_input == "9":
+        team = '"WOL"'
+    elif team_input == "10":
+        team = '"FNC"'
+    elif team_input == "11":
+        team = '"TH"'
+    elif team_input == "12":
+        team = '"TL"'
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = f"{base_statement} WHERE team.team_name = ? ORDER BY player.player_id"
-    cursor.execute(sql,(team,))
+    sql = f"{base_statement} WHERE team.team_name = {team} ORDER BY player.player_id"
+    cursor.execute(sql)
     results = cursor.fetchall()
     print(f"\nHere is the info for {team}\nName       Age Nationality  Edpi USD Won Team  Region")
     for player in results:
@@ -38,11 +62,19 @@ def print_all_team_info():
 
 #this function prints all of the info from a chosen region
 def print_all_region_info():
-    region = input("What regions's info would you like to see? \n")
+    region_input = input("What regions's info would you like to see? \n1. AMERICAS\n2. PACIFIC\n3. CHINA\n4. EMEA\n")
+    if region_input == "1":
+        region = '"AMERICAS"'
+    elif region_input == "2":
+        region = '"PACIFIC"'
+    elif region_input == "3":
+        region = '"CHINA"'
+    elif region_input == "4":
+        region = '"EMEA"'
     db = sqlite3.connect(DATABASE)
     cursor = db.cursor()
-    sql = f"{base_statement} WHERE region.region_name = ? ORDER BY player.player_id"
-    cursor.execute(sql,(region,))
+    sql = f"{base_statement} WHERE region.region_name = {region} ORDER BY player.player_id"
+    cursor.execute(sql)
     results = cursor.fetchall()
     print(f"\nHere is the info for {region}\nName       Age Nationality  Edpi USD Won Team  Region")
     for player in results:
