@@ -131,9 +131,11 @@ def print_all_info_ordered():
         print("You have not chosen an option\n")
     db.close()
 
+#title and introduction
+print("\nI have chosen to make my database about various statistics from popular valorant pro players\nIn my database I have gathered this information from the top 3 teams in the world from each region (all of the teams qualifed to the upcoming masters Toront event)")
 #menu options
 while True:
-    user_input = input("\nWhat would you like to do?\n1. Press 1 to print all data\n2. Choose a team to see their info\n3. Choose a region to see their info\n4. Choose a peice of data to order by\n")
+    user_input = input("You have 4 options\nWhat would you like to do?\n1. Press 1 to print all data\n2. Choose a team to see their info\n3. Choose a region to see their info\n4. Choose a peice of data to order by\n")
 #code for the menu and calling the functions
     if user_input == "exit":
         break
