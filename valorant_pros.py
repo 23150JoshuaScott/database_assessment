@@ -23,7 +23,7 @@ def print_all_info():
     print("\nHere is all of the information in my database\nName       Age Nationality  Edpi USD Won Team  Region")
     for player in results:
         print(f"{player[0]:<11}{player[1]:<4}{player[2]:<13}{player[3]:<5}{player[4]:<8}{player[5]:<6}{player[6]}")
-    print("You can exit the prgram by typing exit")
+    print("You can exit the program by typing exit\n")
     db.close()
 
 
@@ -32,7 +32,7 @@ def print_all_team_info():
     #try helps stop the function if the user has inputted an option unavalible
     try:
         #displaying the options of teams to choose
-        team_input = int(input("What team's info would you like to see? \n1. G2\n2. Sentinels\n3. MIBR\n4. Rex Regum Qeon\n5. Gen.G\n6. Paper Rex\n7. Xi Lai Gaming\n8. Bilibili Gaming\n9. Wolves Esports\n10. fnatic\n11. Team Heretics\n12. Team Liquid\n"))
+        team_input = int(input("What team's info would you like to see? \n1.  G2\n2.  Sentinels\n3.  MIBR\n4.  Rex Regum Qeon\n5.  Gen.G\n6.  Paper Rex\n7.  Xi Lai Gaming\n8.  Bilibili Gaming\n9.  Wolves Esports\n10. fnatic\n11. Team Heretics\n12. Team Liquid\n"))
         if team_input < 1 or team_input > 12:
             print('you have not chosen an option')
             return
@@ -64,16 +64,16 @@ def print_all_team_info():
         #getting all of the info chosen from the database
         db = sqlite3.connect(DATABASE)
         cursor = db.cursor()
-        sql = f"""SELECT player.player_name, player.player_age, player.player_nationality, player.player_edpi, player.player_prize_money
+        sql = f"""SELECT player.player_name, player.player_age, player.player_nationality, player.player_edpi, player.player_prize_money, region.region_name
         {base_statement} WHERE team.team_name = {team} ORDER BY player.player_id"""
         cursor.execute(sql)
         results = cursor.fetchall()
         #printing all the need info for the user
-        print(f"\nHere is the info for {team}\nName       Age Nationality  Edpi USD Won")
+        print(f"\nHere is the info for {team}\nName       Age Nationality  Edpi USD Won Region")
         for player in results:
-            print(f"{player[0]:<11}{player[1]:<4}{player[2]:<13}{player[3]:<5}{player[4]:<8}")
-        print("You can exit the prgram by typing exit")
-    except team_input <= 0 or team_input > 12:
+            print(f"{player[0]:<11}{player[1]:<4}{player[2]:<13}{player[3]:<5}{player[4]:<8}{player[5]:<6}")
+        print("You can exit the program by typing exit\n")
+    except team_input <= 0 or team_input > 12 or ValueError:
         print("You have not chosen an option\n")
         return
     db.close()
@@ -106,8 +106,8 @@ def print_all_region_info():
         print(f"\nHere is the info for {region} region\nName       Age Nationality  Edpi USD Won Team")
         for player in results:
             print(f"{player[0]:<11}{player[1]:<4}{player[2]:<13}{player[3]:<5}{player[4]:<8}{player[5]:<6}")
-        print("You can exit the prgram by typing exit")
-    except region_input <= 0 or region_input > 12:
+        print("You can exit the program by typing exit\n")
+    except region_input <= 0 or region_input > 12 or ValueError:
         print("You have not chosen an option\n")
     db.close()
 
@@ -142,13 +142,13 @@ def print_all_info_ordered():
         print("\nName       Age Nationality  Edpi USD Won Team  Region")
         for player in results:
             print(f"{player[0]:<11}{player[1]:<4}{player[2]:<13}{player[3]:<5}{player[4]:<8}{player[5]:<6}{player[6]}")
-        print("You can exit the prgram by typing exit")
-    except order_input <= 0 or order_input > 12:
+        print("You can exit the program by typing exit\n")
+    except order_input <= 0 or order_input > 12 or ValueError:
         print("You have not chosen an option\n")
     db.close()
 
 #title and introduction
-print("\nI have chosen to make my database about various statistics from popular valorant pro players\nIn my database I have gathered this information from the top 3 teams in the world from each region (all of the teams qualifed to the upcoming masters Toront event)\nYou have 4 options")
+print("\nI have chosen to make my database about various statistics from the top pro valorant players\nIn my database I have gathered this information from the top 3 teams in the world from each region (all of the teams qualifed to the upcoming masters Toront event)\nYou have 4 options")
 #menu options
 while True:
     user_input = input("What would you like to do?\n1. Press 1 to print all data\n2. Choose a team to see their info\n3. Choose a region to see their info\n4. Choose a peice of data to order by\n")
